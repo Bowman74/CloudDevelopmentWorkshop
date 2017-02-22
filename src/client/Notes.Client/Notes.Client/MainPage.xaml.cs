@@ -137,17 +137,12 @@ namespace Notes.Client
                 Note[] notes = null;
                 if (_Filter != string.Empty)
                 {
-                    notes =
-                        await
-                            azureService.GetMobileServicesClinet()
-                                .InvokeApiAsync<Query, Note[]>("NotesQuery", new Query {QueryString = _Filter},
-                                    HttpMethod.Get, null);
+                    notes = await azureService.GetMobileServicesClinet()
+                                .InvokeApiAsync<Query, Note[]>("NotesQuery", new Query {QueryString = _Filter}, HttpMethod.Get, null);
                 }
                 else
                 {
-                    notes =
-                        await
-                            azureService.GetMobileServicesClinet().InvokeApiAsync<Note[]>("Notes", HttpMethod.Get, null);
+                    notes =await azureService.GetMobileServicesClinet().InvokeApiAsync<Note[]>("Notes", HttpMethod.Get, null);
                 }
 
                 Notes = notes.ToList();
@@ -179,6 +174,7 @@ namespace Notes.Client
             var azureService = DependencyService.Get<IAzureService>();
             appSettingsService.Remove(AuthenticaitonTokenKey);
             appSettingsService.Remove(UserIdKey);
+            await azureService.GetMobileServicesClinet().LogoutAsync();
 
             await LoginAsync(appSettingsService, azureService);
         }
