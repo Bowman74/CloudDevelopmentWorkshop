@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Azure.Mobile;
 
 namespace Notes.Client.UWP
 {
@@ -58,6 +59,7 @@ namespace Notes.Client.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
+                MobileCenter.Configure("44d9a3a1-8406-4243-8182-7695c7208f8d");
                 Xamarin.Forms.Forms.Init(e);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)

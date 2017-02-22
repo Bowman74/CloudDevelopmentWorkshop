@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Microsoft.Azure.Mobile;
 using UIKit;
 
 namespace Notes.Client.iOS
@@ -23,6 +24,7 @@ namespace Notes.Client.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            MobileCenter.Configure("44d9a3a1-8406-4243-8182-7695c7208f8d");
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
