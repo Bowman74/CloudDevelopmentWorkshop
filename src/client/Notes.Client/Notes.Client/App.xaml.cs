@@ -24,6 +24,7 @@ namespace Notes.Client
         {
             // Handle when your app starts
             MobileCenter.Start(typeof(Analytics), typeof(Crashes));
+            Analytics.Enabled = true;
         }
 
         protected override void OnSleep()
