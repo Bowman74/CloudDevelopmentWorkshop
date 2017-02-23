@@ -138,16 +138,25 @@ namespace Notes.Client
                 if (_Filter != string.Empty)
                 {
                     notes = await azureService.GetMobileServicesClinet()
-                                .InvokeApiAsync<Query, Note[]>("NotesQuery", new Query {QueryString = _Filter}, HttpMethod.Get, null);
+                        .InvokeApiAsync<Query, Note[]>("NotesQuery", new Query {QueryString = _Filter}, HttpMethod.Post,
+                            null);
                 }
                 else
                 {
-                    notes =await azureService.GetMobileServicesClinet().InvokeApiAsync<Note[]>("Notes", HttpMethod.Get, null);
+                    notes =
+                        await
+                            azureService.GetMobileServicesClinet().InvokeApiAsync<Note[]>("Notes", HttpMethod.Get, null);
                 }
 
                 Notes = notes.ToList();
             }
-            catch (UnauthorizedAccessException) { }
+            catch (UnauthorizedAccessException)
+            {
+            }
+            catch (Exception ex)
+            {
+                var a = ex;
+            }
             finally
             {
                 IsBusy = false;

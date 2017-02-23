@@ -30,7 +30,7 @@ namespace NotesService.Controllers
 
         // GET api/values
         [Authorize]
-        public async Task<Note[]> Get(Query query)
+        public async Task<Note[]> Post(Query query)
         {
             var returnValue = new Collection<Note>();
 

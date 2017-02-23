@@ -37,12 +37,6 @@ namespace NotesService
                 });
             }
 
-            //config.Routes.MapHttpRoute(
-            //name: "Notes",
-            //routeTemplate: "api/notes/{id}",
-            //defaults: new { controller = "notes", id = RouteParameter.Optional }
-            //);
-
             app.UseWebApi(config);
         }
     }

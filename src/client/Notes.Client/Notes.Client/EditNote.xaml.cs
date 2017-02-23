@@ -1,10 +1,12 @@
 ﻿using Notes.Common;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Notes.Client.Interfaces;
 using Notes.Client.Services;
 using Xamarin.Forms;
+using Microsoft.Azure.Mobile.Analytics;
 
 namespace Notes.Client
 {
@@ -40,11 +42,13 @@ namespace Notes.Client
                 {
                     Note = await azureService.GetMobileServicesClinet()
                                 .InvokeApiAsync<Note, Note>("Notes", Note, HttpMethod.Post, null);
+                    Analytics.TrackEvent("Note Added", new Dictionary<string, string> { { "UserId", UserInformation.User.UserId }, { "NoteId", Note.Id } });
                 }
                 else
                 {
                     Note = await azureService.GetMobileServicesClinet()
-                                .InvokeApiAsync<Note, Note>($"Notes/{Note.Id}", Note, HttpMethod.Put, null);
+                        .InvokeApiAsync<Note, Note>($"Notes/{Note.Id}", Note, HttpMethod.Put, null);
+                    Analytics.TrackEvent("Note Edited", new Dictionary<string, string> { { "UserId", UserInformation.User.UserId }, { "NoteId", Note.Id } });
                 }
                 await Navigation.PopAsync(true);
             }
@@ -100,7 +104,8 @@ namespace Notes.Client
             if (answer)
             {
                 var azureService = DependencyService.Get<IAzureService>();
-                var response = await azureService.GetMobileServicesClinet().InvokeApiAsync<HttpResponseMessage>($"Notes/{Note.Id}", HttpMethod.Delete, null);
+                await azureService.GetMobileServicesClinet().InvokeApiAsync<HttpResponseMessage>($"Notes/{Note.Id}", HttpMethod.Delete, null);
+                Analytics.TrackEvent("Note Deleted", new Dictionary<string, string> { { "UserId", UserInformation.User.UserId }, { "NoteId", Note.Id } });
                 await Navigation.PopAsync(true);
             }
         }
