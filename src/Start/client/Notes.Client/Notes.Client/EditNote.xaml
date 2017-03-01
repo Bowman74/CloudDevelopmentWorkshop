@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Notes.Client.EditNote">
+  <StackLayout
+    Orientation="Vertical"
+    HorizontalOptions="Fill"
+    VerticalOptions="Fill">
+    <Editor
+      HorizontalOptions="Fill"
+      VerticalOptions="FillAndExpand"
+      Text="{Binding Note.Content, Mode=TwoWay}">
+    </Editor>
+    <Button
+    x:Name="SaveNote"
+    HorizontalOptions="Fill"
+    VerticalOptions="End"
+    Text="Save"></Button>
+  </StackLayout>
+</ContentPage>
