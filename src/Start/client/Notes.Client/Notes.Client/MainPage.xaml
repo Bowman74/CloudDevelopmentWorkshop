@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:valueConverters="clr-namespace:Notes.Client.ValueConverters;assembly=Notes.Client"
+             x:Class="Notes.Client.MainPage">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <valueConverters:DescriptionValueConverter x:Key="FixDescription"></valueConverters:DescriptionValueConverter>
+    </ResourceDictionary>
+    </ContentPage.Resources>
+  <StackLayout
+    Orientation="Vertical"
+    HorizontalOptions="Fill"
+    VerticalOptions="Fill">
+    <StackLayout
+      Orientation="Horizontal"
+      HorizontalOptions="Fill"
+      VerticalOptions="Start">
+      <Label Text="Filter"></Label>
+      <Entry
+        HorizontalOptions="FillAndExpand"
+        Text="{Binding Filter}"></Entry>
+    </StackLayout>
+    <ListView
+      x:Name="NoteList"
+      HorizontalOptions="Fill"
+      VerticalOptions="FillAndExpand"
+      ItemsSource="{Binding Notes}">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <TextCell Text="{Binding Content, Converter={StaticResource FixDescription}}" />
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+    <Button
+      x:Name="AddNote"
+      HorizontalOptions="Fill"
+      VerticalOptions="End"
+      Text="Add Note"></Button>
+  </StackLayout>
+</ContentPage>
